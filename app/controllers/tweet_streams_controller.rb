@@ -8,6 +8,6 @@ class TweetStreamsController < ApplicationController
   end
 
   def twitter_client
-    @twitter_client ||= TwitterClient.new
+    @twitter_client ||= twitter_client.new
   end
 end
