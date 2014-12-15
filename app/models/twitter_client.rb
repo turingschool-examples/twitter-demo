@@ -8,7 +8,7 @@ class TwitterClient
     twitter_client.user_timeline(username)
   end
 
-  def self.fetch_tweets(username)
-    TWITTER.user_timeline(username)
-  end
+  # def self.fetch_tweets(username)
+  #   TWITTER.user_timeline(username)
+  # end
 end
