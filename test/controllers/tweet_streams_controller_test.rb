@@ -3,6 +3,7 @@ require "ostruct"
 
 class TweetStreamsControllerTest < ActionController::TestCase
   test "fetches tweets on create" do
+    skip
     tweet = OpenStruct.new(:text => "turing is gr8 xoxo",
                            :user => OpenStruct.new(:screen_name => "j3"))
     TWITTER.expects(:user_timeline).with("j3").returns([tweet])
@@ -34,11 +35,19 @@ class TweetStreamsControllerTest < ActionController::TestCase
     assert_not_nil assigns(:tweets)
     assert_select "li.tweet"
   end
+
+  test "fetches tweets avéc VCR" do
+    VCR.use_cassette("j3_tweets") do
+      post :create, :twitter_handle => "j3"
+      assert_response :success
+      assert_not_nil assigns(:tweets)
+      assert_select "li.tweet"
+    end
+  end
 end
 
 class MockClient
   def user_timeline(username)
-    [OpenStruct.new(:text => "turing is gr8 xoxo",
-                    :user => OpenStruct.new(:screen_name => "j3"))]
+     [Hashie::Mash.new(JSON.parse(File.read(File.join(Rails.root, 'test/fixtures/tweet_response.json'))))]
   end
 end
