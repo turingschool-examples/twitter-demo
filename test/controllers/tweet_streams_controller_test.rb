@@ -10,7 +10,7 @@ class TweetStreamsControllerTest < ActionController::TestCase
     @controller.twitter_client
       .expects(:user_timeline)
       .with("j3")
-      .returns([stub("Tweet", message: "heres a AALLL CAPS tweet", user: stub(screen_name: "j3"))])
+      .returns([stub("Tweet", text: "heres a AALLL CAPS tweet", user: stub(screen_name: "j3"))])
     post :create, :twitter_handle => "j3"
     assert_response :success
     assert_not_nil assigns(:tweets)

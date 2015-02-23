@@ -2,7 +2,7 @@
   <ul>
     <% @tweets.each do |tweet| %>
       <li class="tweet">
-        <p><em><%= tweet.user.screen_name %></em> says: <%= tweet.message %></p>
+        <p><em><%= tweet.user.screen_name %></em> says: <%= tweet.text %></p>
       </li>
     <% end %>
   </ul>
