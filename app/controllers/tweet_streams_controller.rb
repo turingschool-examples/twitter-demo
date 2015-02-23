@@ -4,10 +4,10 @@ class TweetStreamsController < ApplicationController
   end
 
   def create
-    @tweets = twitter_client.user_timeline(params[:twitter_handle])
+    @tweets = twitter_client.fetch_tweets(params[:twitter_handle])
   end
 
   def twitter_client
-    TWITTER
+    @twitter_client ||= TwitterClient.new
   end
 end
