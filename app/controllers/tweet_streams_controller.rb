@@ -4,9 +4,15 @@ class TweetStreamsController < ApplicationController
   end
 
   def create
-    @tweets = Twitter::REST::Client.new do |config|
-                config.consumer_key        = "W94h9TI21dRmkuDKewew2gy2t"
-                config.consumer_secret     = "4QOGnSWrT8vfxoUHohZFEtPFeCGlo47uhJatjL90BD73JGe3g7"
-              end.user_timeline(params[:twitter_handle])
+    @user_name = params[:twitter_handle]
+    @tweets = twitter_client.user_timeline(@user_name)
+    @follower_count = twitter_client.user(@user_name).followers_count
+  end
+
+  def twitter_client
+    Twitter::REST::Client.new do |config|
+      config.consumer_key        = "QmnF0N1nALWJCshk5ecUWXG2n"
+      config.consumer_secret     = "N7PoX41YI7YHinZw5qI9XmOskX0nzw60GPtMuQGb7UY6oNh853"
+    end
   end
 end
