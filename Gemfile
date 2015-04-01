@@ -42,4 +42,7 @@ gem "twitter"
 gem "hashie"
 
 group :test do
+  gem "mocha"
+  gem "vcr"
+  gem "webmock"
 end

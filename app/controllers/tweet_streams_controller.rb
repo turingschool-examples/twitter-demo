@@ -1,5 +1,4 @@
 class TweetStreamsController < ApplicationController
-  attr_accessor :twitter_client
   def new
   end
 
@@ -10,9 +9,9 @@ class TweetStreamsController < ApplicationController
   end
 
   def twitter_client
-    Twitter::REST::Client.new do |config|
-      config.consumer_key        = "QmnF0N1nALWJCshk5ecUWXG2n"
-      config.consumer_secret     = "N7PoX41YI7YHinZw5qI9XmOskX0nzw60GPtMuQGb7UY6oNh853"
-    end
+    @twitter_client ||= Twitter::REST::Client.new do |config|
+                          config.consumer_key        = "QmnF0N1nALWJCshk5ecUWXG2n"
+                          config.consumer_secret     = "N7PoX41YI7YHinZw5qI9XmOskX0nzw60GPtMuQGb7UY6oNh853"
+                        end
   end
 end
