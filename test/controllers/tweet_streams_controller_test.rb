@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 require "test_helper"
 
 class TweetStreamsControllerTest < ActionController::TestCase
@@ -18,6 +19,15 @@ class TweetStreamsControllerTest < ActionController::TestCase
     assert_response :success
     assert_not_nil assigns(:tweets)
     assert_select "li.tweet"
+  end
+
+  test "fetches tweets avéc VCR" do
+    VCR.use_cassette("j3_tweets") do
+      post :create, :twitter_handle => "j3"
+      assert_response :success
+      assert_not_nil assigns(:tweets)
+      assert_select "li.tweet"
+    end
   end
 
   def tweet_data

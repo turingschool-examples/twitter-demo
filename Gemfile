@@ -44,4 +44,6 @@ gem "hashie"
 group :test do
   gem "hashie"
   gem "mocha"
+  gem "vcr"
+  gem "webmock"
 end
