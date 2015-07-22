@@ -42,5 +42,6 @@ gem "twitter"
 gem "hashie"
 
 group :test do
+  gem "hashie"
   gem "mocha"
 end
